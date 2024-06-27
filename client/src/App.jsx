@@ -4,7 +4,7 @@ import PosProveedor from "./components/PosProveedor";
 import Proveedorlist from "./components/Proveedorlist";
 import Lotes from "./components/lotes";
 import Loteslistar from "./components/loteslistar";
-// import PosLotes from "./components/Poslotes";
+import PosLotes from "./components/Poslotes";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Proveedorlist />} />
         <Route path="/lotes" element={<Lotes />} />
-        {/* <Route path="/lotes/edit" element={<PosLotes />} /> */}
+        <Route path="/lotes/edit" element={<PosLotes />} />
         <Route path="/loteslistar" element={<Loteslistar/>}/>
         <Route path="/proveedor/edit" element={<PosProveedor />} />
         <Route path="/proveedor/:id_proveedor/edit" element={<PosProveedor/>}/>
