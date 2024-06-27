@@ -38,8 +38,6 @@ function Navbar() {
             Listar los lotes
           </Button>
         </Typography>
-
-<<<<<<< HEAD
         <Typography variant="h6" sx={{ flexGrow: 1, display: 'flex', gap: 2 }}>
         <Button
           variant="contained"
@@ -56,25 +54,6 @@ function Navbar() {
           Nuevo proveedor
         </Button>
         </Typography>
-=======
-            <Typography variant="h6" sx={{ flexGrow: 1, display: 'flex', gap: 2 }}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => navigate('/lotes/edit')}
-            >
-              Nuevo lote
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => navigate('/proveedor/edit')}
-            >
-              Nuevo proveedor
-            </Button>
-            </Typography>
->>>>>>> 5ee5dde056e7e1c089a35f7a57d06ea15fcfd770
-
       </Toolbar>
     </Container>
   </AppBar>
