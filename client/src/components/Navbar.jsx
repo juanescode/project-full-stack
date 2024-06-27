@@ -40,13 +40,13 @@ function Navbar() {
             </Typography>
 
             <Typography variant="h6" sx={{ flexGrow: 1, display: 'flex', gap: 2 }}>
-            {/* <Button
+            <Button
               variant="contained"
               color="secondary"
               onClick={() => navigate('/lotes/edit')}
             >
               Nuevo lote
-            </Button> */}
+            </Button>
             <Button
               variant="contained"
               color="secondary"
