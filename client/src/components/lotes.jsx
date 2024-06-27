@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Card, Typography, CardContent } from "@mui/material";
+import { Card, Typography, CardContent, Pagination } from "@mui/material";
 
 function Proveedorlist() {
   const [proveedores, setProveedores] = useState([]);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [elementosPorPagina, setElementosPorPagina] = useState(3);
 
   const loadTasks = async () => {
     const response = await fetch("http://localhost:3000/api/lotes");
@@ -14,22 +16,30 @@ function Proveedorlist() {
     loadTasks();
   }, []);
 
+  const indiceDelUltimoElemento = paginaActual * elementosPorPagina;
+  const indiceDelPrimerElemento = indiceDelUltimoElemento - elementosPorPagina;
+  const elementosActuales = proveedores.slice(indiceDelPrimerElemento, indiceDelUltimoElemento);
+
+  const totalPaginas = Math.ceil(proveedores.length / elementosPorPagina);
+
+  const handleChangePage = (event, newValue) => {
+    setPaginaActual(newValue);
+  };
+
   return (
     <>
-      <h1
-        style={{
-          color: "white",
-          backgroundColor: "#9c27b0", // Color de fondo azul
-          padding: "10px 20px", // Espaciado interno
-          borderRadius: "10px", // Bordes redondeados
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Sombra suave
-          textAlign: "center", // Centrar el texto
-          margin: "20px 0", // Margen exterior para separarlo de otros elementos
-        }}
-      >
+      <h1 style={{
+        color: "white",
+        backgroundColor: "#9c27b0",
+        padding: "10px 20px",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        textAlign: "center",
+        margin: "20px 0",
+      }}>
         Lotes vencidos
       </h1>
-      {proveedores.map((proveedor) => (
+      {elementosActuales.map((proveedor) => (
         <Card
           style={{
             marginBottom: ".7rem",
@@ -45,35 +55,45 @@ function Proveedorlist() {
           >
             <div style={{ color: "white" }}>
               <Typography>
-                <span style={{ color: "#e84118" }}>ID del Lote:</span>{" "}
-                {proveedor.id_lote}
+                <span style={{ color: "#e84118" }}>ID del Lote:</span> {proveedor.id_lote}
               </Typography>
-
               <Typography>
-                <span style={{ color: "#e84118" }}>Fecha de vencimiento:</span>{" "}
-                {proveedor.fecha_de_vencimiento}
+                <span style={{ color: "#e84118" }}>Fecha de vencimiento:</span> {proveedor.fecha_de_vencimiento}
               </Typography>
-
               <Typography>
-                <span style={{ color: "#e84118" }}>Nombre de producto:</span>{" "}
-                {proveedor.nombre_producto}
+                <span style={{ color: "#e84118" }}>Nombre de producto:</span> {proveedor.nombre_producto}
               </Typography>
-
               <Typography>
-                <span style={{ color: "#e84118" }}>Nombre de proveedor:</span>{" "}
-                {proveedor.nombre_proveedor}
+                <span style={{ color: "#e84118" }}>Nombre de proveedor:</span> {proveedor.nombre_proveedor}
               </Typography>
-
               <Typography>
-                <span style={{ color: "#e84118" }}>Stock:</span>{" "}
-                {proveedor.stock}
+                <span style={{ color: "#e84118" }}>Stock:</span> {proveedor.stock}
               </Typography>
             </div>
           </CardContent>
         </Card>
       ))}
+      <Pagination
+        count={totalPaginas}
+        page={paginaActual}
+        onChange={handleChangePage}
+        size="large"
+        sx={{
+          marginTop: "20px",
+          justifyContent: "center",
+          display: "flex",
+          "& .MuiPaginationItem-root": {
+            color: "#fff",
+            backgroundColor: "#1976d2",
+            "&:hover": {
+              backgroundColor: "#1565c0",
+            },
+          },
+        }}
+      />
     </>
   );
 }
 
 export default Proveedorlist;
+

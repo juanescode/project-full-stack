@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 import * as ctrlProveedor from "../controllers/proveedores.controller.js";
-import { lotes, lotes_vencidos, lotesListar } from "../controllers/lotes.controller.js";
+import { lotes, lotes_vencidos, lotesListar, deleteLote } from "../controllers/lotes.controller.js";
 
 router.get("/proveedor", ctrlProveedor.getProveedores);
 
@@ -18,6 +18,8 @@ router.post("/lotesagregar", lotes);
 router.get("/loteslistar", lotesListar);
 
 router.get("/lotes", lotes_vencidos)
+
+router.delete("/lotes/:id_lote", deleteLote);
 
 
 export default router;

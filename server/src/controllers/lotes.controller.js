@@ -32,6 +32,18 @@ export const lotesListar = async (req, res) => {
   }
 }
 
+export const deleteLote = async (req, res) => {
+  const { id_lote } = req.params;
+  try {
+    await pool.query(`DELETE FROM lote WHERE id_lote = ?`, [id_lote]);
+    res.json({ message: "Lote eliminado" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Algo salio mal" + error,
+    });
+  }
+}
+
 export const lotes_vencidos = async (req, res) => {
   try {
     const [rows] = await pool.query(`SELECT 
